@@ -1,0 +1,35 @@
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
+server-->browser: Failed to load content... because it redirect with Status Code 302 to /exampleapp/notes. 
+note over server:
+Response Headers:
+content-length: 78
+content-type: text/html; charset=utf-8
+date: Tue, 05 Apr 2022 07:08:05 GMT
+location: /exampleapp/notes
+server: nginx/1.18.0
+vary: Accept
+x-powered-by: Express
+end note
+note over browser:
+Form Data:
+note: Hello There
+end note
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+server-->browser: HTML-code
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server-->browser: main.css
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+server-->browser: main.js
+note over browser:
+browser starts executing js-code
+that requests JSON data from server 
+end note
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+server-->browser: [{"content":"faaak","date":"2022-04-04T18:17:14.442Z"}, ...]
+
+note over browser:
+browser executes the event handler
+that renders notes to display
+end note

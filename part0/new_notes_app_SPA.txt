@@ -1,0 +1,40 @@
+title app SPA
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa
+server-->browser: HTML-code
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server-->browser: main.css
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+server-->browser: spa.js
+
+note over browser:
+browser starts executing js-code
+that requests JSON data from server 
+end note
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+server-->browser: [{"content":"faaak","date":"2022-04-04T18:17:14.442Z"}, ...]
+
+note over browser:
+browser executes the event handler
+that renders notes to display
+end note
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+server-->browser: {"message":"note created"}, content-type: application/json; 
+note over server:
+Response Headers:
+content-length: 26
+content-type: application/json; charset=utf-8
+date: Tue, 05 Apr 2022 07:35:13 GMT
+etag: W/"1a-i19+dCmxaEJyl8vlsmVCUQvLtU8"
+server: nginx/1.18.0
+x-powered-by: Express
+end note
+note over browser:
+Request Payload:
+{
+  "content": "Hello There",
+  "date": "2022-04-05T07:35:12.073Z"
+}
+end note
